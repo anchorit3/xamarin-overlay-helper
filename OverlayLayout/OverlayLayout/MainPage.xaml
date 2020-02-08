@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             Title="Xamarin Overlay Helper"
+             x:Class="OverlayLayout.MainPage">
+
+    <ScrollView>
+        <StackLayout VerticalOptions="CenterAndExpand">
+            <Label Text="Xamarin Overlay Helper" HorizontalOptions="CenterAndExpand" TextColor="#000044" FontSize="32" FontAttributes="Bold"></Label>
+            <Label Text="Examples" HorizontalOptions="CenterAndExpand" Margin="0,20" TextColor="#000044" FontSize="18" FontAttributes="Bold"></Label>
+            <Button Text="StackLayout" FontAttributes="Bold" Margin="20,10" CornerRadius="20" BackgroundColor="#2B79E2" TextColor="White" x:Name="StackLayoutExample" Clicked="StackLayoutExample_Clicked"></Button>
+            <Button Text="ScrollView" FontAttributes="Bold" Margin="20,10" CornerRadius="20" BackgroundColor="#2B79E2" TextColor="White" x:Name="ScrollViewExample" Clicked="ScrollViewExample_Clicked"></Button>
+            <Button Text="Grid" FontAttributes="Bold" Margin="20,10" CornerRadius="20" BackgroundColor="#2B79E2" TextColor="White" x:Name="GridExample" Clicked="GridExample_Clicked"></Button>
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             Title="Example with StackLayout"
+             x:Class="OverlayLayout.Pages.StackPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Example with StackLayout" HorizontalOptions="CenterAndExpand" Margin="0,20" TextColor="#000044" FontSize="18" FontAttributes="Bold"></Label>
+            <Button x:Name="popupTop" Text="Show Top Popup" FontAttributes="Bold" Margin="20,10" CornerRadius="20" BackgroundColor="#2B79E2" TextColor="White" Clicked="popupTop_Clicked"/>
+            <Button x:Name="popupCenter" Text="Show Center Popup" FontAttributes="Bold" Margin="20,10" CornerRadius="20" BackgroundColor="#2B79E2" TextColor="White" Clicked="popupCenter_Clicked"/>
+            <Button x:Name="popupBottom" Text="Show Bottom Popup" FontAttributes="Bold" Margin="20,10" CornerRadius="20" BackgroundColor="#2B79E2" TextColor="White" Clicked="popupBottom_Clicked"/>
+            <Button x:Name="popupError" Text="Show Error Popup" FontAttributes="Bold" Margin="20,10" CornerRadius="20" BackgroundColor="#E22B2B" TextColor="White" Clicked="popupError_Clicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
