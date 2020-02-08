@@ -27,7 +27,7 @@ protected override void OnAppearing()
 OverlayHelper.Open(new ExamplePopup1(), AbsoluteLayoutFlags.All,
                     new Rectangle(0, 0.5, 1, 0.4), Color.FromHex("#4d000000"));
 ```
-*In this case we use (ContentView) ExamplePopup1 with LayoutFlags, LayoutBounds and Overlay Background Color*
+*In this case we use* `(ContentView) ExamplePopup1` with `(AbsoluteLayoutFlags) LayoutFlags`, `(Rectangle) LayoutBounds` and `(Color)Overlay Background Color`*
 
 
 #### License
