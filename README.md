@@ -27,8 +27,15 @@ protected override void OnAppearing()
 OverlayHelper.Open(new ExamplePopup1(), AbsoluteLayoutFlags.All,
                     new Rectangle(0, 0.5, 1, 0.4), Color.FromHex("#4d000000"));
 ```
-*In this case we use* `(ContentView) ExamplePopup1` with `(AbsoluteLayoutFlags) LayoutFlags`, `(Rectangle) LayoutBounds` and `(Color)Overlay Background Color`*
+*In this case we use* `(ContentView) ExamplePopup1` with `(AbsoluteLayoutFlags) LayoutFlags`, `(Rectangle) LayoutBounds` and `(Color)Overlay Background Color`
 
+##### For more information about `AbsoluteLayoutFlags` you can go to [Microsoft documentation](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/layouts/absolute-layout)
+
+#### How to close popup programatly?
+
+```cs
+OverlayHelper.Close();
+```
 
 #### License
 Licensed under MIT, see license file.
