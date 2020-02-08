@@ -27,7 +27,7 @@ namespace OverlayLayout.Pages
             await Task.Run(() =>
             {
                 OverlayHelper.Open(new ExamplePopup1(), AbsoluteLayoutFlags.All,
-                new Rectangle(0, 0, 1, 0.4), Color.FromHex("#4d000000"));
+                new Rectangle(0, 0, 1, 0.3), Color.FromHex("#4d000000"));
             });
         }
 
@@ -36,7 +36,7 @@ namespace OverlayLayout.Pages
             await Task.Run(() =>
             {
                 OverlayHelper.Open(new ExamplePopup1(), AbsoluteLayoutFlags.All,
-                    new Rectangle(0, 0.5, 1, 0.4), Color.FromHex("#4d000000"));
+                    new Rectangle(0, 0.5, 1, 0.3), Color.FromHex("#4d000000"));
             });
         }
 
@@ -45,7 +45,7 @@ namespace OverlayLayout.Pages
             await Task.Run(() =>
             {
                 OverlayHelper.Open(new ExamplePopup1(), AbsoluteLayoutFlags.All,
-                    new Rectangle(0, 1, 1, 0.4), Color.FromHex("#4d000000"));
+                    new Rectangle(0, 1, 1, 0.3), Color.FromHex("#4d000000"));
             });
         }
 

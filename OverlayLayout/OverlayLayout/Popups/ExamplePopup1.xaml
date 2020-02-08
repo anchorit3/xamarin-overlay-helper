@@ -6,7 +6,7 @@
              mc:Ignorable="d"
              x:Class="OverlayLayout.Popups.ExamplePopup1">
     <ContentView.Content>
-        <Frame CornerRadius="20" BackgroundColor="#fff" HasShadow="false">
+        <Frame CornerRadius="20" BackgroundColor="#fff" HasShadow="false" Margin="20,0">
             <Label TextColor="#000044" FontAttributes="Bold" FontSize="18"
                    VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" 
                    Text="Example popup" />

@@ -6,17 +6,21 @@
              mc:Ignorable="d"
              x:Class="OverlayLayout.Popups.ExamplePopup2">
     <ContentView.Content>
-        <Frame Margin="20,0" CornerRadius="20" BackgroundColor="#FFE4E4" HasShadow="false">
-            <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                <Frame CornerRadius="20" Padding="10" BackgroundColor="#FFBBBB" HasShadow="false">
-                    <Label TextColor="#440000" FontAttributes="Bold" FontSize="18"
-                   VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" 
+        <Frame Margin="20,0" CornerRadius="20" BackgroundColor="#FF4444" Padding="0">
+            <StackLayout Margin="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="0">
+                <Label TextColor="White" Padding="20,10,20,5" FontAttributes="Bold" FontSize="18"
+                   VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"
                    Text="Example Error Popup" />
-                </Frame>
-                <Label FontSize="16" Margin="0,20" TextColor="#770000" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at justo sollicitudin erat mattis placerat. Praesent pellentesque nunc lacus, interdum tempus erat malesuada sed...." />
-                <Button x:Name="OK" WidthRequest="40" HeightRequest="20" Padding="0"
-                        FontAttributes="Bold" TextColor="#E90000" BackgroundColor="Transparent" 
-                        VerticalOptions="EndAndExpand" HorizontalOptions="EndAndExpand" Text="Ok" Clicked="OK_Clicked" />
+                <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="0">
+                    <Frame  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" CornerRadius="20" BackgroundColor="#F5f5f5" HasShadow="false" Padding="0">
+                        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="10">
+                            <Label FontSize="16" Margin="0,20" TextColor="#770000" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at justo sollicitudin erat mattis placerat. Praesent pellentesque nunc lacus, interdum tempus erat malesuada sed...." />
+                            <Button x:Name="OK" WidthRequest="40" HeightRequest="20" Padding="0"
+                                FontAttributes="Bold" TextColor="#FF4444" BackgroundColor="Transparent" 
+                                VerticalOptions="EndAndExpand" HorizontalOptions="EndAndExpand" Text="Ok" Clicked="OK_Clicked" />
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
             </StackLayout>
         </Frame>
     </ContentView.Content>
