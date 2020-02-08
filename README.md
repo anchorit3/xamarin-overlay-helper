@@ -31,7 +31,7 @@ OverlayHelper.Open(new ExamplePopup1(), AbsoluteLayoutFlags.All,
 
 ##### For more information about `AbsoluteLayoutFlags` you can go to [Microsoft documentation](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/layouts/absolute-layout)
 
-#### How to close popup programatly?
+#### How to close popup programmatically?
 
 ```cs
 OverlayHelper.Close();
