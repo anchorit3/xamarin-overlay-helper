@@ -22,15 +22,8 @@ namespace OverlayLayout
                     VerticalOptions = LayoutOptions.FillAndExpand,
                     HorizontalOptions = LayoutOptions.FillAndExpand,
                 };
-                if (Application.Current.MainPage.Navigation.NavigationStack.Count > 0)
-                {
-                    int index = Application.Current.MainPage.Navigation.NavigationStack.Count - 1;
-                    CurrentContent = ((ContentPage)Application.Current.MainPage.Navigation.NavigationStack[index]).Content;
-                }
-                else
-                {
-                    CurrentContent = ((ContentPage)Application.Current.MainPage).Content;
-                }
+
+                FindContent();
 
                 if (CurrentContent is StackLayout || CurrentContent is Grid || CurrentContent is ScrollView)
                 {
@@ -52,15 +45,7 @@ namespace OverlayLayout
                     Absolute.Children.Add(CurrentContent);
                     Absolute.Children.Add(OverlayContainer);
 
-                    if (Application.Current.MainPage.Navigation.NavigationStack.Count > 0)
-                    {
-                        int index = Application.Current.MainPage.Navigation.NavigationStack.Count - 1;
-                        ((ContentPage)Application.Current.MainPage.Navigation.NavigationStack[index]).Content = Absolute;
-                    }
-                    else
-                    {
-                        ((ContentPage)Application.Current.MainPage).Content = Absolute;
-                    }
+                    OverrideContent(Absolute);
                 }
             });
         }
@@ -72,32 +57,13 @@ namespace OverlayLayout
                 LayoutBounds = absoluteLayoutBounds;
                 PopUpContent = popUpContent;
 
-                if (Application.Current.MainPage.Navigation.NavigationStack.Count > 0)
-                {
-                    int index = Application.Current.MainPage.Navigation.NavigationStack.Count - 1;
-                    CurrentContent = ((ContentPage)Application.Current.MainPage.Navigation.NavigationStack[index]).Content;
-                }
-                else
-                {
-                    CurrentContent = ((ContentPage)Application.Current.MainPage).Content;
-                }
-
+                FindContent();
                 if (!(CurrentContent is AbsoluteLayout)) AdjustView();
             
                 OverlayContainer.BackgroundColor = OverlayBgColor; 
                 OverlayContainer.IsVisible = true;
 
                 AddPopupToView(absoluteLayoutFlags);
-            });
-        }
-
-        public static void AddPopupToView(AbsoluteLayoutFlags layoutFlags)
-        {
-            MainThread.BeginInvokeOnMainThread(() =>
-            {
-                AbsoluteLayout.SetLayoutFlags(PopUpContent, layoutFlags);
-                AbsoluteLayout.SetLayoutBounds(PopUpContent, LayoutBounds);
-                Absolute.Children.Add(PopUpContent);
             });
         }
 
@@ -111,5 +77,45 @@ namespace OverlayLayout
         }
 
         private static void OverlayTapped(object sender, EventArgs e) => Close();
+
+
+        private static void AddPopupToView(AbsoluteLayoutFlags layoutFlags)
+        {
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                AbsoluteLayout.SetLayoutFlags(PopUpContent, layoutFlags);
+                AbsoluteLayout.SetLayoutBounds(PopUpContent, LayoutBounds);
+                Absolute.Children.Add(PopUpContent);
+            });
+        }
+
+        private static void FindContent()
+        {
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                if (Application.Current.MainPage.Navigation.NavigationStack.Count > 0)
+                {
+                    int index = Application.Current.MainPage.Navigation.NavigationStack.Count - 1;
+                    CurrentContent = ((ContentPage)Application.Current.MainPage.Navigation.NavigationStack[index]).Content;
+                }
+                else
+                {
+                    CurrentContent = ((ContentPage)Application.Current.MainPage).Content;
+                }
+            });
+        }
+
+        private static void OverrideContent(AbsoluteLayout absolute)
+        {
+            if (Application.Current.MainPage.Navigation.NavigationStack.Count > 0)
+            {
+                int index = Application.Current.MainPage.Navigation.NavigationStack.Count - 1;
+                ((ContentPage)Application.Current.MainPage.Navigation.NavigationStack[index]).Content = absolute;
+            }
+            else
+            {
+                ((ContentPage)Application.Current.MainPage).Content = absolute;
+            }
+        }
     }
 }
