@@ -52,4 +52,4 @@ OverlayHelper.Close();
 Licensed under MIT, see license file.
 
 
-*I think it may be available to many people. Best regards and have a nice use* 😁
+*I think it may be useful to many people. Best regards and have a nice use* 😁
