@@ -1,7 +1,9 @@
 # Xamarin.Forms Overlay Helper
 For open custom Popups over content in your app without custom renderer. 
-You can customize popups how you wont, what you need is only one thing. 
-Make new ContentView and then use as content of popup.
+
+You can customize popups how you wont, what you need is only one thing.
+
+Make new ContentView and then use as content of Popup.
 
 
 <img src="https://raw.githubusercontent.com/anchorit3/xamarin-overlay-helper/master/Images/s1.jpg" width="140"><img src="https://raw.githubusercontent.com/anchorit3/xamarin-overlay-helper/master/Images/s2.jpg" width="140"><img src="https://raw.githubusercontent.com/anchorit3/xamarin-overlay-helper/master/Images/s3.jpg" width="140"><img src="https://raw.githubusercontent.com/anchorit3/xamarin-overlay-helper/master/Images/s4.jpg" width="140"><img src="https://raw.githubusercontent.com/anchorit3/xamarin-overlay-helper/master/Images/s5.jpg" width="140"><img src="https://raw.githubusercontent.com/anchorit3/xamarin-overlay-helper/master/Images/s6.jpg" width="140">
@@ -11,7 +13,16 @@ This is not perfect solution, but now working with `Stacklayout`, `Grid` and `Sc
 
 My helper need only `Xamarin.forms` + `Xamarin.Esseltials`
 
-#### To start using, import `OverlayHelper.cs` into your project and add `OnAppearing` in `ContentPage`:
+### To start using:
+
+#### 1. Import `OverlayHelper.cs` into your project
+
+#### 2. Add `AdjustView` method in `OnAppearing` in your `ContentPage`
+```cs
+OverlayHelper.AdjustView();
+```
+
+*Full example of OnAppearing:*
 ```cs
 protected override void OnAppearing()
 {
@@ -19,15 +30,15 @@ protected override void OnAppearing()
     OverlayHelper.AdjustView();
 }
 ```
-*This part move Stacklayout, Grid or ScrollView to AbsoluteLayout and adding overlay element to view*
+*This part moves Stacklayout, Grid or ScrollView to AbsoluteLayout and adds an Overlay element to it*
 
 
-#### Now you need only open Popup 😉
+#### 3. Now you need only open Popup 😉
 ```cs
 OverlayHelper.Open(new ExamplePopup1(), AbsoluteLayoutFlags.All,
-                    new Rectangle(0, 0.5, 1, 0.4), Color.FromHex("#4d000000"));
+                    new Rectangle(0, 0.5, 1, 0.3), Color.FromHex("#4d000000"));
 ```
-*In this case we use* `(ContentView) ExamplePopup1` with `(AbsoluteLayoutFlags) LayoutFlags`, `(Rectangle) LayoutBounds` and `(Color)Overlay Background Color`
+*In this case we use* `(ContentView) ExamplePopup1` with `(AbsoluteLayoutFlags) LayoutFlags`, `(Rectangle) LayoutBounds` and `(Color) Overlay Background Color`
 
 ##### For more information about `AbsoluteLayoutFlags` you can go to [Microsoft documentation](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/layouts/absolute-layout)
 
