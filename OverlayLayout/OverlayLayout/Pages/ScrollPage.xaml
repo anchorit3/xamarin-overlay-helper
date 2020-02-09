@@ -15,6 +15,8 @@
                 <BoxView HeightRequest="300" BackgroundColor="AliceBlue"></BoxView>
                 <Button x:Name="popupCenter" Text="Show Center Popup" FontAttributes="Bold" Margin="20,10" CornerRadius="20" BackgroundColor="#2B79E2" TextColor="White" Clicked="popupCenter_Clicked"/>
                 <BoxView HeightRequest="300" BackgroundColor="AliceBlue"></BoxView>
+                <Button x:Name="dropdown" Text="Open Dropdown" FontAttributes="Bold" Margin="20,10" CornerRadius="20" BackgroundColor="#00C114" TextColor="White" Clicked="dropdown_Clicked"/>
+                <BoxView HeightRequest="300" BackgroundColor="AliceBlue"></BoxView>
                 <Button x:Name="popupBottom" Text="Show Bottom Popup" FontAttributes="Bold" Margin="20,10" CornerRadius="20" BackgroundColor="#2B79E2" TextColor="White" Clicked="popupBottom_Clicked"/>
                 <BoxView HeightRequest="300" BackgroundColor="AliceBlue"></BoxView>
                 <Button x:Name="popupError" Text="Show Error Popup" FontAttributes="Bold" Margin="20,10" CornerRadius="20" BackgroundColor="#E22B2B" TextColor="White" Clicked="popupError_Clicked"/>
