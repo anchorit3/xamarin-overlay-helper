@@ -51,7 +51,7 @@ OverlayHelper.Close();
 ### Dropdown example
 <img src="https://raw.githubusercontent.com/anchorit3/xamarin-overlay-helper/master/Images/s7.jpg" width="140"><img src="https://raw.githubusercontent.com/anchorit3/xamarin-overlay-helper/master/Images/s8.jpg" width="140">
 
-*Example of Dropdown you can find in* `ScrollView Example Page` *(Green button)*
+*An example of a drop-down menu can be found in* `ScrollView Example Page` *(Green button)*
 
 
 #### License
