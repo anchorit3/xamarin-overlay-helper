@@ -17,16 +17,16 @@ namespace OverlayLayout
         {
             MainThread.BeginInvokeOnMainThread(() =>
             {
-                Absolute = new AbsoluteLayout()
-                {
-                    VerticalOptions = LayoutOptions.FillAndExpand,
-                    HorizontalOptions = LayoutOptions.FillAndExpand,
-                };
-
-                FindContent();
+                FindContent(true);
 
                 if (CurrentContent is StackLayout || CurrentContent is Grid || CurrentContent is ScrollView)
                 {
+                    Absolute = new AbsoluteLayout()
+                    {
+                        VerticalOptions = LayoutOptions.FillAndExpand,
+                        HorizontalOptions = LayoutOptions.FillAndExpand,
+                    };
+
                     var gestureRecognizer = new TapGestureRecognizer();
                     gestureRecognizer.Tapped += OverlayTapped;
 
@@ -59,7 +59,8 @@ namespace OverlayLayout
 
                 FindContent();
                 if (!(CurrentContent is AbsoluteLayout)) AdjustView();
-            
+                else Absolute = (AbsoluteLayout)CurrentContent; 
+
                 OverlayContainer.BackgroundColor = OverlayBgColor; 
                 OverlayContainer.IsVisible = true;
 
@@ -89,19 +90,30 @@ namespace OverlayLayout
             });
         }
 
-        private static void FindContent()
+        private static void FindContent(bool replace = false)
         {
             MainThread.BeginInvokeOnMainThread(() =>
             {
                 if (Application.Current.MainPage.Navigation.NavigationStack.Count > 0)
                 {
                     int index = Application.Current.MainPage.Navigation.NavigationStack.Count - 1;
-                    CurrentContent = ((ContentPage)Application.Current.MainPage.Navigation.NavigationStack[index]).Content;
+                    if (((ContentPage)Application.Current.MainPage.Navigation.NavigationStack[index]) != null)
+                    {
+                        CurrentContent = ((ContentPage)Application.Current.MainPage.Navigation.NavigationStack[index]).Content;
+                        if (replace) ((ContentPage)Application.Current.MainPage.Navigation.NavigationStack[index]).Content = null;
+                    }
+                    else
+                    {
+                        CurrentContent = ((ContentPage)((IShellSectionController)((Shell)Application.Current.MainPage).CurrentItem.CurrentItem).PresentedPage).Content;
+                        if (replace) ((ContentPage)((IShellSectionController)((Shell)Application.Current.MainPage).CurrentItem.CurrentItem).PresentedPage).Content = null;
+                    }
                 }
                 else
                 {
                     CurrentContent = ((ContentPage)Application.Current.MainPage).Content;
+                    if (replace) ((ContentPage)Application.Current.MainPage).Content = null;
                 }
+                CurrentContent.Parent = null;
             });
         }
 
@@ -110,7 +122,14 @@ namespace OverlayLayout
             if (Application.Current.MainPage.Navigation.NavigationStack.Count > 0)
             {
                 int index = Application.Current.MainPage.Navigation.NavigationStack.Count - 1;
-                ((ContentPage)Application.Current.MainPage.Navigation.NavigationStack[index]).Content = absolute;
+                if (((ContentPage)Application.Current.MainPage.Navigation.NavigationStack[index]) != null)
+                {
+                    ((ContentPage)Application.Current.MainPage.Navigation.NavigationStack[index]).Content = absolute;
+                }
+                else
+                {
+                    ((ContentPage)((IShellSectionController)((Shell)Application.Current.MainPage).CurrentItem.CurrentItem).PresentedPage).Content = absolute;
+                }
             }
             else
             {
