@@ -6,6 +6,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using OverlayLayout.Popups;
+using OverlayLayout.Helper;
 
 namespace OverlayLayout.Pages
 {
@@ -69,12 +70,14 @@ namespace OverlayLayout.Pages
             {
                 Margin = new Thickness(20, 0),
                 CornerRadius = 20,
+                HasShadow = false,
                 HeightRequest = dropdownHeight,
                 BackgroundColor = Color.FromHex("#F5F5F5"),
             };
 
             var list = new ListView()
             {
+                BackgroundColor = Color.FromHex("#00000000"),
                 ItemsSource = new List<string> {
                     "test option 1",
                     "test option 2",

@@ -1,92 +1,119 @@
 ﻿using System;
-using System.Threading.Tasks;
+using System.Collections.Generic;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
-namespace OverlayLayout
+namespace OverlayLayout.Helper
 {
     public static class OverlayHelper
     {
+        public static bool IsOpen;
         public static View CurrentContent;
         public static AbsoluteLayout Absolute;
-        public static StackLayout OverlayContainer;
-        public static ContentView PopUpContent;
+        public static List<StackLayout> OverlayContainer;
+        public static List<ContentView> PopUpContent;
         public static Rectangle LayoutBounds;
+        public static TapGestureRecognizer OverlayTapGesture;
+
+
+        public static event EventHandler<OverlayStateEventArgs> OverlayStateChanged = delegate { };
 
         public static void AdjustView()
         {
+            OverlayTapGesture = new TapGestureRecognizer();
+            OverlayTapGesture.Tapped += OverlayTapped;
+
             MainThread.BeginInvokeOnMainThread(() =>
             {
                 FindContent(true);
 
                 if (CurrentContent is StackLayout || CurrentContent is Grid || CurrentContent is ScrollView)
                 {
+                    PopUpContent = new List<ContentView>();
+                    OverlayContainer = new List<StackLayout>();
+
                     Absolute = new AbsoluteLayout()
                     {
                         VerticalOptions = LayoutOptions.FillAndExpand,
                         HorizontalOptions = LayoutOptions.FillAndExpand,
                     };
 
-                    var gestureRecognizer = new TapGestureRecognizer();
-                    gestureRecognizer.Tapped += OverlayTapped;
 
                     AbsoluteLayout.SetLayoutFlags(CurrentContent, AbsoluteLayoutFlags.All);
                     AbsoluteLayout.SetLayoutBounds(CurrentContent, new Rectangle(0, 0, 1, 1));
 
-                    OverlayContainer = new StackLayout()
-                    {
-                        BackgroundColor = Color.FromHex("#55000000"),
-                        IsVisible = false,
-                    };
-                    AbsoluteLayout.SetLayoutFlags(OverlayContainer, AbsoluteLayoutFlags.All);
-                    AbsoluteLayout.SetLayoutBounds(OverlayContainer, new Rectangle(0, 0, 1, 1));
-
-                    OverlayContainer.GestureRecognizers.Add(gestureRecognizer);
                     Absolute.Children.Add(CurrentContent);
-                    Absolute.Children.Add(OverlayContainer);
-
-                    OverrideContent(Absolute);
                 }
+                OverrideContent(Absolute);
             });
         }
 
-        public static void Open(ContentView popUpContent, AbsoluteLayoutFlags absoluteLayoutFlags, Rectangle absoluteLayoutBounds, Color OverlayBgColor)
+        public static void Open(ContentView popUpContent, AbsoluteLayoutFlags absoluteLayoutFlags, Rectangle absoluteLayoutBounds, Color overlayBgColor)
         {
             MainThread.BeginInvokeOnMainThread(() =>
             {
                 LayoutBounds = absoluteLayoutBounds;
-                PopUpContent = popUpContent;
+                PopUpContent.Add(popUpContent);
 
                 FindContent();
                 if (!(CurrentContent is AbsoluteLayout)) AdjustView();
-                else Absolute = (AbsoluteLayout)CurrentContent; 
+                else Absolute = (AbsoluteLayout)CurrentContent;
 
-                OverlayContainer.BackgroundColor = OverlayBgColor; 
-                OverlayContainer.IsVisible = true;
-
+                AddOverlayToView(overlayBgColor);
                 AddPopupToView(absoluteLayoutFlags);
+
+                ChangeStateOverlay(true);
             });
         }
 
-        public static void Close()
+        public static void Close(bool triggerEvent = true)
         {
+            if (triggerEvent)
+            {
+                ChangeStateOverlay(false);
+            }
+
             MainThread.BeginInvokeOnMainThread(() =>
             {
-                OverlayContainer.IsVisible = false;
-                Absolute.Children.Remove(PopUpContent);
+                if (PopUpContent != null && OverlayContainer != null)
+                {
+                    if (PopUpContent.Count != 0 && OverlayContainer.Count != 0)
+                    {
+                        Absolute.Children.Remove(PopUpContent[PopUpContent.Count - 1]);
+                        PopUpContent.Remove(PopUpContent[PopUpContent.Count - 1]);
+                        Absolute.Children.Remove(OverlayContainer[OverlayContainer.Count - 1]);
+                        OverlayContainer.Remove(OverlayContainer[OverlayContainer.Count - 1]);
+                    }
+                }
             });
         }
 
         private static void OverlayTapped(object sender, EventArgs e) => Close();
 
 
+        private static void AddOverlayToView(Color overlayBgColor)
+        {
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                OverlayContainer.Add(new StackLayout()
+                {
+                    BackgroundColor = Color.FromHex("#55000000"),
+                });
+                AbsoluteLayout.SetLayoutFlags(OverlayContainer[OverlayContainer.Count - 1], AbsoluteLayoutFlags.All);
+                AbsoluteLayout.SetLayoutBounds(OverlayContainer[OverlayContainer.Count - 1], new Rectangle(0, 0, 1, 1));
+
+                OverlayContainer[OverlayContainer.Count - 1].BackgroundColor = overlayBgColor;
+                OverlayContainer[OverlayContainer.Count - 1].GestureRecognizers.Add(OverlayTapGesture);
+                Absolute.Children.Add(OverlayContainer[OverlayContainer.Count - 1]);
+            });
+        }
         private static void AddPopupToView(AbsoluteLayoutFlags layoutFlags)
         {
             MainThread.BeginInvokeOnMainThread(() =>
             {
-                AbsoluteLayout.SetLayoutFlags(PopUpContent, layoutFlags);
-                AbsoluteLayout.SetLayoutBounds(PopUpContent, LayoutBounds);
-                Absolute.Children.Add(PopUpContent);
+                AbsoluteLayout.SetLayoutFlags(PopUpContent[PopUpContent.Count - 1], layoutFlags);
+                AbsoluteLayout.SetLayoutBounds(PopUpContent[PopUpContent.Count - 1], LayoutBounds);
+                Absolute.Children.Add(PopUpContent[PopUpContent.Count - 1]);
             });
         }
 
@@ -135,6 +162,12 @@ namespace OverlayLayout
             {
                 ((ContentPage)Application.Current.MainPage).Content = absolute;
             }
+        }
+
+        public static void ChangeStateOverlay(bool state)
+        {
+            IsOpen = state;
+            OverlayStateChanged?.Invoke(null, new OverlayStateEventArgs(state));
         }
     }
 }

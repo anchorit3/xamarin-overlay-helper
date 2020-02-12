@@ -5,6 +5,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using OverlayLayout.Popups;
+using OverlayLayout.Helper;
 
 namespace OverlayLayout.Pages
 {

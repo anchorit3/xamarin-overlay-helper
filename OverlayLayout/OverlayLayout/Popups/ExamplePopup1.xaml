@@ -7,9 +7,13 @@
              x:Class="OverlayLayout.Popups.ExamplePopup1">
     <ContentView.Content>
         <Frame CornerRadius="20" BackgroundColor="#fff" HasShadow="false" Margin="20,0">
-            <Label TextColor="#000044" FontAttributes="Bold" FontSize="18"
+            <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                <Label TextColor="#000044" FontAttributes="Bold" FontSize="18"
                    VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" 
                    Text="Example popup" />
+                <Button x:Name="newLayer" Clicked="newLayerClicked" Text="Open Error in new layer" CornerRadius="20"
+                        Margin="20" BackgroundColor="#AA0000" TextColor="White" FontAttributes="Bold" ></Button>
+            </StackLayout>
         </Frame>
     </ContentView.Content>
 </ContentView>

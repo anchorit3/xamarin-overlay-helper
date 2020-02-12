@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="OverlayLayout.Popups.ExamplePopup3">
+    <ContentView.Content>
+        <Frame Margin="20,0" CornerRadius="20" BackgroundColor="#FF8044" Padding="0">
+            <StackLayout Margin="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="0">
+                <Label TextColor="White" Padding="20,10,20,5" FontAttributes="Bold" FontSize="18"
+                   VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"
+                   Text="Example Error Popup" />
+                <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="0">
+                    <Frame  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" CornerRadius="20" BackgroundColor="#F5f5f5" HasShadow="false" Padding="0">
+                        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="10">
+                            <Label FontSize="16" Margin="0,20" TextColor="#772E00" Text="You want to open third overlay?" />
+                            <Button x:Name="OK" WidthRequest="40" HeightRequest="20" Padding="0"
+                                FontAttributes="Bold" TextColor="#FF8044" BackgroundColor="Transparent" 
+                                VerticalOptions="EndAndExpand" HorizontalOptions="EndAndExpand" Text="Open" Clicked="OK_Clicked" />
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </StackLayout>
+        </Frame>
+    </ContentView.Content>
+</ContentView>
