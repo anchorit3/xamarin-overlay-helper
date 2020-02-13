@@ -9,9 +9,10 @@ Create new ContentView and then use as content of Popup.
 <img src="https://raw.githubusercontent.com/anchorit3/xamarin-overlay-helper/master/Images/s1.jpg" width="140"><img src="https://raw.githubusercontent.com/anchorit3/xamarin-overlay-helper/master/Images/s2.jpg" width="140"><img src="https://raw.githubusercontent.com/anchorit3/xamarin-overlay-helper/master/Images/s3.jpg" width="140"><img src="https://raw.githubusercontent.com/anchorit3/xamarin-overlay-helper/master/Images/s4.jpg" width="140"><img src="https://raw.githubusercontent.com/anchorit3/xamarin-overlay-helper/master/Images/s5.jpg" width="140"><img src="https://raw.githubusercontent.com/anchorit3/xamarin-overlay-helper/master/Images/s6.jpg" width="140">
 
 Maybe this is not perfect solution, but now working with `Stacklayout`, `Grid` and `ScrollView` and with `NavigationPage` and without.
-*(Propobly dont work with AppShell)*
 
-My helper need only `Xamarin.forms` + `Xamarin.Esseltials`
+#### Requirements
+* Xamarin.Forms
+* Xamarin.Esseltials
 
 ### To start using:
 
